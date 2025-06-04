@@ -1,12 +1,12 @@
 
     
     @font-face {
-  font-family: 'gothice'; /* ¡Personaliza este nombre! */
+  font-family: 'Gothice';
   src: 
     url('fonts/gothice/gothice_-webfont.woff2') format('woff2'),
     url('fonts/gothice/gothice_-webfont.woff') format('woff');
-  font-weight: normal; /* Ajusta según la variante (400, 700, etc.) */
-  font-style: normal; /* Cambia a "italic" si es necesario */
+  font-weight: normal; 
+  font-style: normal; 
 }
     
     :root {
@@ -211,11 +211,11 @@
             font-weight: 400;
             color: var(--color-primary);
             letter-spacing: 1px;
-            font-family: "gothice", system-ui;
+            font-family: "Gothice", system-ui;
         }
 
         .logo-text span {
-            font-family: "gothice", system-ui;
+            font-family: "Gothice", system-ui;
             color: var(--color-secondary);
         }
 
