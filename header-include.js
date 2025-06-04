@@ -18,58 +18,89 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
-// Función para inicializar todas las funciones del header
+ // Función para inicializar todas las funciones del header
 function initHeaderFunctions() {
-    
-    
-    // Tema Oscuro - MODIFICADO PARA MODO OSCURO PREDETERMINADO
-    if (themeToggle) {
-        const themeIcon = themeToggle.querySelector('i');
-        
-        // Verificar preferencia guardada o establecer modo oscuro como predeterminado
+
+
+
+                // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme or set dark mode as default
         const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        // Determinar tema inicial (prioridad: localStorage > sistema > predeterminado oscuro)
-        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'dark'); // Siempre oscuro si no hay preferencia
-        
-        // Aplicar tema inicial
-        if (initialTheme === 'dark') {
-            document.body.classList.add('dark-mode');
-            themeIcon.classList.remove('fa-moon');
-            themeIcon.classList.add('fa-sun');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
-        
-        // Guardar tema inicial si no existía
-        if (!savedTheme) {
-            localStorage.setItem('theme', 'dark');
-        }
-        
+
         themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
+            body.classList.toggle('dark-mode');
             
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
+            if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
             } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
                 localStorage.setItem('theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             }
         });
-    }
-    
-    // Efecto de desplazamiento del encabezado
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+
+        // Mobile Menu Management
+        const menuBtn = document.getElementById('menuBtn');
+        const closeBtn = document.getElementById('closeBtn');
+        const mobileNav = document.getElementById('mobileNav');
+
+        menuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+            menuBtn.style.display = 'none';
+            closeBtn.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+            menuBtn.style.display = 'flex';
+            closeBtn.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close menu when clicking on links
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                menuBtn.style.display = 'flex';
+                closeBtn.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Efecto scroll en header
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (nav.classList.contains('active') && 
+                !nav.contains(e.target) && 
+                e.target !== menuBtn) {
+                nav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
         }
-    });
-
-
-
-}

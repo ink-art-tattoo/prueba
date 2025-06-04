@@ -33,10 +33,27 @@ function typeEffect() {
     setTimeout(typeEffect, typingSpeed);
 }
 
+
+
 // Iniciar el efecto después de cargar la página
 window.addEventListener('load', () => {
     setTimeout(typeEffect, 1000);
+
 });
+
+// Ocultar loader y mostrar contenido cuando la página esté cargada
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('dot-spinner');
+            const content = document.getElementById('content');
+            
+            // Ocultar loader con transición
+            loader.classList.add('hidden');
+            
+            // Mostrar contenido principal
+            setTimeout(() => {
+                content.style.opacity = "1";
+            }, 500); // Coincide con la duración de la transición
+        });
 
 // Animación al desplazar
 const observer = new IntersectionObserver((entries) => {
