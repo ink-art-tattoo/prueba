@@ -215,6 +215,7 @@
         }
 
         .logo-text span {
+            font-family: "gothice", system-ui;
             color: var(--color-secondary);
         }
 
