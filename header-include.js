@@ -20,34 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función para inicializar todas las funciones del header
 function initHeaderFunctions() {
-    // Menú Hamburguesa
-    const menuBtn = document.getElementById('menuBtn');
-    const closeBtn = document.getElementById('closeBtn');
-    const navLinks = document.querySelector('.nav-links');
-    const themeToggle = document.getElementById('themeToggle');
     
-    if (menuBtn && closeBtn && navLinks) {
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.add('active');
-            menuBtn.style.display = 'none';
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeBtn.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            menuBtn.style.display = 'block';
-            document.body.style.overflow = 'auto';
-        });
-        
-        // Cerrar menú al hacer clic en un enlace
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuBtn.style.display = 'block';
-                document.body.style.overflow = 'auto';
-            });
-        });
-    }
     
     // Tema Oscuro - MODIFICADO PARA MODO OSCURO PREDETERMINADO
     if (themeToggle) {
